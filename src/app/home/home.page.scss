@@ -1,0 +1,51 @@
+
+ion-content{
+    --background :#d0e0e7;
+}
+
+ion-toolbar{
+    height: 14%;
+    --background :#607D8B;
+}
+
+.logo{
+height: 90px;
+transform:translate(0px, 5px);
+}
+
+.sign-button{
+    
+    --background :#31353D;
+   //--color: #ffffff;
+    height: 55px;
+    width: 10%;
+    margin-right: 20px;
+}
+
+.triangle{
+    width: 50%;
+    transform:translate(120%, -3%);
+}
+.head{
+    font-size: 40px;
+    color: #13C6BC;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    width:auto;
+    //transform:translate(1000px, -1px);
+    transform:translate(1210px, -400px);
+
+}
+
+.google-card{
+    --background: #607d8bd2;
+    width: 50%;
+    height: 50%;
+    transform:translate(0px, -490px);
+    border-radius: 30px;
+    .google{
+    margin-left: 75px;
+    
+    }
+}
+
+

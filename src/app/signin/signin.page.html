@@ -1,0 +1,79 @@
+<ion-content [fullscreen]="true">
+
+  <ion-toolbar>
+    <ion-title slot="start" class="logo">
+      <img src="../assets/icon/nabeeh-logo.png" (click)="mainpage()" >
+    </ion-title>
+
+    <ion-buttons slot="start">
+      <ion-button (click)="mainpage()" >
+        Main Page
+      </ion-button>
+      <ion-button (click)="services()" >
+        Our Servises
+      </ion-button>
+      <ion-button (click)="about()" >
+        About Us
+      </ion-button>
+      <ion-button (click)="contact()" >
+        Contact Us
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+
+
+  <!-- UI components  -->
+  <ion-grid>
+    <ion-row>
+
+      <ion-col size="7">
+        <!-- background images -->
+          <img class="logincircles" src="../assets/icon/circles.png">
+      </ion-col>
+
+
+      <ion-col>
+
+        <ion-card class="main-card">
+          <ion-card shape="round">
+            <ion-item class="info">
+              <ion-label position="floating">Enter Your Email</ion-label>
+              <ion-input [(ngModel)]="email" type="email"></ion-input>
+            </ion-item>
+          </ion-card>
+
+          <ion-card shape="round">
+            <ion-item class="info">
+              <ion-label position="floating">Enter Your Password</ion-label>
+              <ion-input [(ngModel)]="password" type="password"></ion-input>
+            </ion-item>
+          </ion-card>
+
+          <div>
+            <ion-button class="signin" shape="round" fill="outline" (click)="signin()" > SignIn </ion-button>
+          </div>
+
+          <div style="text-align: center; padding-top: 10px;">
+            <a style="color: #03031a;">Forgot Pasword?</a>
+          </div>
+
+
+          <section class="sec1">
+            <p class="register"> Not registered yet? </p>
+            <ion-button class="signup" shape="round" fill="outline" (click)="signup()" > SignUp
+            </ion-button>
+          </section>
+        </ion-card>
+
+      </ion-col>
+
+     
+    </ion-row>
+  </ion-grid>
+
+
+
+
+
+</ion-content>

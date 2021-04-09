@@ -1,0 +1,133 @@
+<ion-content [fullscreen]="true" slot="fixed">
+  <!--
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+-->
+
+  <ion-toolbar>
+    <ion-title slot="start" class="logo">
+      <img src="../assets/icon/nabeeh-logo.png" tappable (click)="mainpage()">
+    </ion-title>
+
+    <ion-buttons slot="start">
+      <ion-button (click)="mainpage()">
+        Main Page
+      </ion-button>
+      <ion-button (click)="services()">
+        Our Servises
+      </ion-button>
+      <ion-button (click)="about()">
+        About Us
+      </ion-button>
+      <ion-button (click)="contact()">
+        Contact Us
+      </ion-button>
+    </ion-buttons>
+
+    <ion-button (click)="signout()" slot="end" class="sign-button">
+      Sign Out
+    </ion-button>
+
+  </ion-toolbar>
+
+  <ion-header>
+    <ion-toolbar class="name">
+      <ion-title *ngFor="let i of empData"><strong>Welcome, </strong>  {{ i.payload.doc.data().fname }} {{ i.payload.doc.data().lname }}
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <ion-searchbar showCancelButton="focus" [(ngModel)]="searchFor" (keyup)="searchByName()" placeholder="Search by name..."></ion-searchbar>
+
+  <ion-grid>
+    <ion-row>
+
+      <ion-col size="2">
+        <ion-card class="nav-card">
+          <ion-item class="nav-items" tappable (click)="info()">
+            <h2 class="h">
+              <ion-icon name="people-outline"></ion-icon> Users
+            </h2>
+          </ion-item>
+          <ion-item class="nav-items" tappable (click)="permits()">
+            <h2 class="h">
+              <ion-icon name="navigate-outline"></ion-icon> Permits
+            </h2>
+          </ion-item>
+          <ion-item class="nav-items" tappable (click)="reports()">
+            <h2 class="h">
+              <ion-icon name="podium-outline"></ion-icon> Reports
+            </h2>
+          </ion-item>
+          <ion-item class="nav-items" tappable (click)="profile()">
+            <h2 class="h">
+              <ion-icon name="person-outline"></ion-icon> Profile
+            </h2>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="10">
+        <ion-card class="users-card">
+
+          <ion-list *ngFor="let message of items; let i =index;" >
+            <ion-item [detail]="false">
+              <div  slot="start"></div>
+              <ion-label class="ion-text-wrap">
+                <h1 style="color: rgb(25, 25, 46);">
+                  {{message.payload.doc.data().fname +' '+ message.payload.doc.data().lname}}
+                  <span id="tree"  class="date">
+                    <ion-note style="color: black;">{{ message.payload.doc.data().createdAt | date:'short'}}</ion-note>
+                  </span>
+                </h1>
+                <div  >
+                  National ID : {{message.payload.doc.data().nid}}<br>
+                  Email : {{message.payload.doc.data().email}}<br>
+                  Phone Number : {{message.payload.doc.data().phone}}
+
+                  <ion-button class="delete" (click)="deletAccount(i)" slot="end" ><ion-icon name="trash-outline"></ion-icon> -DELETE</ion-button>
+                </div>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+          
+        </ion-card>
+      </ion-col>
+
+      <!--
+         <ion-label>Users</ion-label>
+        <ion-title>Users</ion-title>
+<strong>{{i+1}} </strong>
+          <div *ngIf="item.children && item.open">
+            try this out !
+          </div>
+        <ion-list>
+          <app-message *ngFor="let message of items" [message]="message"></app-message>
+        </ion-list>
+       
+
+
+   
+
+
+      <ion-col>
+        <h5>Users Email :</h5>
+        <div *ngFor="let item of items">
+          <h5>{{item.payload.doc.data().email}} {{item.payload.doc.data().nid}} {{items.length}} </h5>
+        </div>
+      </ion-col>
+ -->
+
+    </ion-row>
+  </ion-grid>
+
+
+
+
+
+  <!-- <h5> {{ calcCrow(21.622030199999998, 39.2063598, 21.602973424432644, 39.10745094046701) }}</h5> -->
+
+
+</ion-content>

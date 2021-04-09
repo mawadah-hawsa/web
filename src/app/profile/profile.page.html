@@ -1,0 +1,172 @@
+<ion-content [fullscreen]="true" slot="fixed">
+  <!--
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+-->
+  <ion-toolbar>
+    <ion-title slot="start" class="logo">
+      <img src="../assets/icon/nabeeh-logo.png" tappable (click)="mainpage()">
+    </ion-title>
+
+    <ion-buttons slot="start">
+      <ion-button (click)="mainpage()">
+        Main Page
+      </ion-button>
+      <ion-button (click)="services()">
+        Our Servises
+      </ion-button>
+      <ion-button (click)="about()">
+        About Us
+      </ion-button>
+      <ion-button (click)="contact()">
+        Contact Us
+      </ion-button>
+    </ion-buttons>
+
+    <ion-button (click)="signout()" slot="end" class="sign-button">
+      Sign Out
+    </ion-button>
+
+  </ion-toolbar>
+
+  <ion-header>
+    <ion-toolbar class="name">
+      <ion-title *ngFor="let i of empData"><strong>Welcome, </strong> {{ i.payload.doc.data().fname }} {{
+        i.payload.doc.data().lname }}
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid>
+    <ion-row>
+
+      <ion-col size="2">
+        <ion-card class="nav-card">
+          <ion-item class="nav-items" tappable (click)="info()">
+            <h2 class="h">
+              <ion-icon name="people-outline"></ion-icon> Users
+            </h2>
+          </ion-item>
+          <ion-item class="nav-items" tappable (click)="permits()">
+            <h2 class="h">
+              <ion-icon name="navigate-outline"></ion-icon> Permits
+            </h2>
+          </ion-item>
+          <ion-item class="nav-items" tappable (click)="reports()">
+            <h2 class="h">
+              <ion-icon name="podium-outline"></ion-icon> Reports
+            </h2>
+          </ion-item>
+          <ion-item class="nav-items" tappable (click)="profile()">
+            <h2 class="h">
+              <ion-icon name="person-outline"></ion-icon> Profile
+            </h2>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="10">
+        <ion-card class="title-card">
+          <ion-card-header>
+            My Profile
+          </ion-card-header>
+        </ion-card>
+
+        <ion-card class="profile-card">
+          <ion-card-subtitle>please fill all the form before update.</ion-card-subtitle>
+
+          <form [formGroup]="empForm" (ngSubmit)="onSubmit(empForm.value)" *ngFor="let e of empData;">
+
+            <div class="form-group">
+
+              <ion-label style="color: #30434e;" position="fixed">First Name:</ion-label>
+              <ion-input style="color: #fdfdfd;" type="text" formControlName="fname" class="form-control"
+                [(ngModel)]="emp_fname" placeholder="{{e.payload.doc.data().fname}}"></ion-input>
+              <div *ngFor="let validation of validation_messages.fname">
+                <mat-error
+                  *ngIf="empForm.get('fname').hasError(validation.type) && (empForm.get('fname').dirty || empForm.get('fname').touched)">
+                  {{validation.message}}</mat-error>
+              </div>
+            </div>
+
+            <div class="form-group">
+
+              <ion-label style="color: #30434e;" position="stacked">Last Name:</ion-label>
+              <ion-input style="color: #fdfdfd;" type="text" formControlName="lname" class="form-control"
+                [(ngModel)]="emp_lname" placeholder="{{e.payload.doc.data().lname}}"></ion-input>
+              <div *ngFor="let validation of validation_messages.lname">
+                <mat-error
+                  *ngIf="empForm.get('lname').hasError(validation.type) && (empForm.get('lname').dirty || empForm.get('lname').touched)">
+                  {{validation.message}}</mat-error>
+              </div>
+            </div>
+            <div class="form-group">
+
+              <ion-label style="color: #30434e;" position="stacked">National ID:</ion-label>
+              <ion-input style="color: #fdfdfd;" type="text" formControlName="nid" class="form-control"
+                [(ngModel)]="emp_nid" placeholder="{{e.payload.doc.data().nid}}"></ion-input>
+
+              <div *ngFor="let validation of validation_messages.nid">
+                <mat-error
+                  *ngIf="empForm.get('nid').hasError(validation.type) && (empForm.get('nid').dirty || empForm.get('nid').touched)">
+                  {{validation.message}}</mat-error>
+              </div>
+            </div>
+            <div class="form-group">
+
+              <ion-label style="color: #30434e;" position="stacked">Email:</ion-label>
+              <ion-input style="color: #fdfdfd;" type="text" formControlName="email" class="form-control"
+                [(ngModel)]="emp_email" placeholder="{{e.payload.doc.data().email}}" readonly="true"></ion-input>
+
+            </div>
+            <div class="form-group">
+
+              <ion-label style="color: #30434e;" position="stacked">Phone number:</ion-label>
+              <ion-input style="color: #fdfdfd;" type="text" formControlName="phone" class="form-control"
+                [(ngModel)]="emp_phone" placeholder="{{e.payload.doc.data().phone}}"></ion-input>
+              <div *ngFor="let validation of validation_messages.phone">
+                <mat-error
+                  *ngIf="empForm.get('phone').hasError(validation.type) && (empForm.get('phone').dirty || empForm.get('phone').touched)">
+                  {{validation.message}}</mat-error>
+              </div>
+            </div>
+
+            <div>
+              <ion-button class="submit-button" type="submit">Update</ion-button>
+            </div>
+          </form>
+
+        </ion-card>
+
+
+        <ion-list *ngFor="let message of items; let i =index;">
+          <ion-item [detail]="false">
+            <div slot="start"></div>
+            <ion-label class="ion-text-wrap">
+              <h1 style="color: rgb(25, 25, 46);">
+                {{message.payload.doc.data().fname +' '+ message.payload.doc.data().lname}}
+                <span id="tree" class="date">
+                  <ion-note style="color: black;">{{ message.payload.doc.data().createdAt | date:'short'}}</ion-note>
+                </span>
+              </h1>
+              <div>
+                National ID : {{message.payload.doc.data().nid}}<br>
+                Email : {{message.payload.doc.data().email}}<br>
+                Phone Number : {{message.payload.doc.data().phone}}
+
+                <ion-button class="delete" (click)="deletAccount(i)" slot="end">
+                  <ion-icon name="trash-outline"></ion-icon> -DELETE
+                </ion-button>
+              </div>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+
+      </ion-col>
+
+
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

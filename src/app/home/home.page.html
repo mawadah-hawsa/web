@@ -1,0 +1,67 @@
+
+
+<ion-content [fullscreen]="true" slot="fixed">
+  <!--
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+-->
+  
+
+  <ion-toolbar>
+    <ion-title slot="start" class = "logo">
+        <img  src="../assets/icon/nabeeh-logo.png" (click)= "mainpage()">
+    </ion-title>
+
+    <ion-buttons slot="start">
+      <ion-button (click)= "mainpage()" >
+        Main Page
+      </ion-button>
+      <ion-button (click)= "services()" >
+        Our Servises
+      </ion-button>
+      <ion-button (click)= "about()" >
+        About Us
+      </ion-button>
+      <ion-button (click)= "contact()" >
+        Contact Us
+      </ion-button>
+    </ion-buttons>
+
+    <ion-button (click)= "signin()" slot="end" class="sign-button" >
+      Sign In
+    </ion-button>
+    
+  </ion-toolbar>
+
+
+  <img src="../assets/icon/Group 1.png" class="triangle">
+  <h1 class="head">Your Health Is <br> A Priority </h1>
+
+  <ion-card class="google-card">
+    <ion-card-header style="font-size: 40px; color: #000;">
+      Get Nabeeh Application <br> To Be More Safe
+    </ion-card-header>
+    <ion-card-content>
+      <img src="../assets/icon/google.png" class="google">
+    </ion-card-content>
+  </ion-card>
+  
+
+</ion-content>
+
+
+
+
+
+<!-- <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">
+        Inbox
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-list>
+    <app-message *ngFor="let message of getMessages()" [message]="message"></app-message>
+  </ion-list>-->
