@@ -33,35 +33,33 @@
 
   <ion-header>
     <ion-toolbar class="name">
-      <ion-title *ngIf="empData"><strong>Welcome, </strong>  {{ empData.fname }} {{ empData.lname }}
+      <ion-title *ngIf="empData"><strong>Welcome Officer, </strong>  {{ empData.fname }} {{ empData.lname }}
       </ion-title>
     </ion-toolbar>
   </ion-header>
 
-
-  <ion-searchbar showCancelButton="focus" [(ngModel)]="searchFor" (keyup)="searchByName()" placeholder="Search by name..."></ion-searchbar>
 
   <ion-grid>
     <ion-row>
 
       <ion-col size="2">
         <ion-card class="nav-card">
-          <ion-item class="nav-info" tappable (click)="info()" [detail]="true">
+          <ion-item class="nav-items" tappable (click)="noAccess()">
             <h2 class="h">
               <ion-icon name="people-outline"></ion-icon> Users
             </h2>
           </ion-item>
-          <ion-item class="nav-items" tappable (click)="permits()">
+          <ion-item class="nav-items" tappable (click)="noAccess()">
             <h2 class="h">
               <ion-icon name="navigate-outline"></ion-icon> Permits
             </h2>
           </ion-item>
-          <ion-item class="nav-items" tappable (click)="reports()">
+          <ion-item class="nav-report" tappable (click)="reports()" [detail]="true">
             <h2 class="h">
               <ion-icon name="podium-outline"></ion-icon> Reports
             </h2>
           </ion-item>
-          <ion-item class="nav-items" tappable (click)="profile()">
+          <ion-item class="nav-items" tappable (click)="noAccess()">
             <h2 class="h">
               <ion-icon name="person-outline"></ion-icon> Profile
             </h2>
@@ -72,23 +70,25 @@
       <ion-col size="10">
         <ion-card class="users-card">
 
-          <ion-list *ngFor="let message of items; let i =index;" >
+          <ion-list *ngFor="let message of Permits" >
             <ion-item [detail]="false">
               <div  slot="start"></div>
               <ion-label class="ion-text-wrap">
                 <h1 style="color: rgb(25, 25, 46);">
-                  {{message.payload.doc.data().fname +' '+ message.payload.doc.data().lname}}
                   <span id="tree"  class="date">
-                    <ion-note style="color: black;">{{ message.payload.doc.data().createdAt | date:'short'}}</ion-note>
+                    <ion-note style="color: black;">{{ message.timestamp | date:'short'}}</ion-note>
                   </span>
                 </h1>
                 <div  >
-                  National ID : {{message.payload.doc.data().nid}}<br>
-                  Email : {{message.payload.doc.data().email}}<br>
-                  Phone Number : {{message.payload.doc.data().phone}}
-
-                  <ion-button class="delete" (click)="deletAccount(i)" slot="end" ><ion-icon name="trash-outline"></ion-icon> -DELETE</ion-button>
+                  National ID : {{message.nid}}<br>
+                  Destination : {{message.dest}}<br>
+                  Type : {{message.type}}<br>
+                  Duration : {{message.time}}<br>
+              
                 </div>
+               
+                  <ion-note class="Status" > Arrival Status : {{message.status}}</ion-note>
+                
               </ion-label>
             </ion-item>
           </ion-list>

@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { DataService, Message } from '../services/data.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { LoadingController, ToastController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
+
 
 
 
@@ -21,7 +23,7 @@ export class InformationsPage implements OnInit {
   items: Array<any>;
   name_filtered_items: Array<any>;
   email_filtered_items: Array<any>;
-  empData: Array<any>;
+  empData: any;
   emp_email: string;
   emp_id: any;
   searchFor:any;
@@ -36,26 +38,37 @@ export class InformationsPage implements OnInit {
     private data: DataService,
     private afs: AngularFirestore,
     private toastr: ToastController,
+    private auth: AuthService
     
   ) { }
 
   ngOnInit() {
+   
     this.afauth.user.subscribe(res => {
       this.emp_email = res.email;
       this.emp_id = res.uid;
-      //console.log(this.emp_id);
-    });
-    this.currentEmp();
+      console.log(this.emp_email);
+      this.currentEmp();
+    }); 
+
+   
     this.getData();
   }
 
   currentEmp() {
     
     this.firebase.searchEmp(this.emp_email)
-      .subscribe(result => {
-        this.empData = result;
+    .subscribe(ss => {
+      if (ss.docs.length === 0) {
+        console.log('Document not found! Try again!');
 
-      })
+      } else {
+        ss.docs.forEach(doc => {
+          this.empData = doc.data();
+          console.log( this.empData.fname);
+        })
+      }
+    });
 
   }
 
@@ -93,9 +106,7 @@ export class InformationsPage implements OnInit {
   }
 
   signout() {
-    this.afauth.signOut().then(() => {
-      this.router.navigate(['/home']);
-    });
+    this.auth.logout();
   }
   mainpage(){
     this.router.navigate(["home"]);

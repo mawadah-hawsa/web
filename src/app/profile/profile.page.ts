@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { DataService } from '../services/data.service';
 import { FirebaseService } from '../services/firebase.service';
-import {FormBuilder, FormGroup, Validators,FormControl} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 
 @Component({
@@ -15,8 +15,8 @@ import {FormBuilder, FormGroup, Validators,FormControl} from '@angular/forms';
 })
 export class ProfilePage implements OnInit {
 
-  empData: Array<any>;
-  item:any;
+  empData: any;
+  item: any;
   emp_email: string;
   emp_id: any;
   emp_nid: any;
@@ -52,49 +52,55 @@ export class ProfilePage implements OnInit {
     private afs: AngularFirestore,
     private toastr: ToastController,
     private fb: FormBuilder,
-   
+
 
   ) { }
 
   ngOnInit() {
     this.afauth.user.subscribe(res => {
-      this.emp_email = res.email;
-      this.emp_id = res.uid;
-      
-      
+      this.firebase.searchEmp(res.email)
+        .subscribe(ss => {
+          if (ss.docs.length === 0) {
+            console.log('Document not found! Try again!');
+          } else {
+            ss.docs.forEach(doc => {
+              this.empData = doc.data();
+            })
+          }
+        });
     });
 
-    this.currentEmp();
-    //this.createForm();
+    //this.currentEmp();
+    this.createForm();
   }
 
   currentEmp() {
 
-    this.firebase.searchEmp(this.emp_email)
-      .subscribe(result => {
-        this.empData = result;
-      })
-      this.createForm();
+
+
+    this.createForm();
   }
 
   createForm() {
     this.empForm = this.fb.group({
-      fname: [this.emp_fname,Validators.required],
-      lname: [this.emp_lname,Validators.required],
-      nid: [this.emp_nid,Validators.required],
-      email: [this.emp_email,Validators.required],
-      phone: [this.emp_phone,Validators.required]
+      fname: [this.emp_fname, Validators.required],
+      lname: [this.emp_lname, Validators.required],
+      nid: [this.emp_nid, Validators.required],
+      email: [this.emp_email, Validators.required],
+      phone: [this.emp_phone, Validators.required],
+      password: ['']
     });
   }
 
-  onSubmit(value){
+  onSubmit(value) {
     value.email = this.emp_email;
+    value.password = this.empData.password;
     this.firebase.updateEmp(this.emp_id, value)
-    .then(
-      res => {
-        this.router.navigate(['/informations']);
-      }
-    )
+      .then(
+        res => {
+          this.router.navigate(['/informations']);
+        }
+      )
   }
   signout() {
     this.afauth.signOut().then(() => {

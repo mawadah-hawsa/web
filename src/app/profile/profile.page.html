@@ -32,8 +32,7 @@
 
   <ion-header>
     <ion-toolbar class="name">
-      <ion-title *ngFor="let i of empData"><strong>Welcome, </strong> {{ i.payload.doc.data().fname }} {{
-        i.payload.doc.data().lname }}
+      <ion-title *ngIf="empData"><strong>Welcome, </strong> {{ empData.fname }} {{ empData.lname }}
       </ion-title>
     </ion-toolbar>
   </ion-header>
@@ -58,7 +57,7 @@
               <ion-icon name="podium-outline"></ion-icon> Reports
             </h2>
           </ion-item>
-          <ion-item class="nav-items" tappable (click)="profile()">
+          <ion-item class="nav-profile" tappable (click)="profile()" [detail]="true">
             <h2 class="h">
               <ion-icon name="person-outline"></ion-icon> Profile
             </h2>
@@ -76,13 +75,13 @@
         <ion-card class="profile-card">
           <ion-card-subtitle>please fill all the form before update.</ion-card-subtitle>
 
-          <form [formGroup]="empForm" (ngSubmit)="onSubmit(empForm.value)" *ngFor="let e of empData;">
+          <form [formGroup]="empForm" (ngSubmit)="onSubmit(empForm.value)" *ngIf="empData">
 
             <div class="form-group">
 
               <ion-label style="color: #30434e;" position="fixed">First Name:</ion-label>
-              <ion-input style="color: #fdfdfd;" type="text" formControlName="fname" class="form-control"
-                [(ngModel)]="emp_fname" placeholder="{{e.payload.doc.data().fname}}"></ion-input>
+              <ion-input style="color: #fdfdfd; " type="text" formControlName="fname" class="form-control"
+                [(ngModel)]="emp_fname" placeholder="{{empData.fname}}"></ion-input>
               <div *ngFor="let validation of validation_messages.fname">
                 <mat-error
                   *ngIf="empForm.get('fname').hasError(validation.type) && (empForm.get('fname').dirty || empForm.get('fname').touched)">
@@ -94,7 +93,7 @@
 
               <ion-label style="color: #30434e;" position="stacked">Last Name:</ion-label>
               <ion-input style="color: #fdfdfd;" type="text" formControlName="lname" class="form-control"
-                [(ngModel)]="emp_lname" placeholder="{{e.payload.doc.data().lname}}"></ion-input>
+                [(ngModel)]="emp_lname" placeholder="{{empData.lname}}"></ion-input>
               <div *ngFor="let validation of validation_messages.lname">
                 <mat-error
                   *ngIf="empForm.get('lname').hasError(validation.type) && (empForm.get('lname').dirty || empForm.get('lname').touched)">
@@ -105,7 +104,7 @@
 
               <ion-label style="color: #30434e;" position="stacked">National ID:</ion-label>
               <ion-input style="color: #fdfdfd;" type="text" formControlName="nid" class="form-control"
-                [(ngModel)]="emp_nid" placeholder="{{e.payload.doc.data().nid}}"></ion-input>
+                [(ngModel)]="emp_nid" placeholder="{{empData.nid}}"></ion-input>
 
               <div *ngFor="let validation of validation_messages.nid">
                 <mat-error
@@ -117,14 +116,14 @@
 
               <ion-label style="color: #30434e;" position="stacked">Email:</ion-label>
               <ion-input style="color: #fdfdfd;" type="text" formControlName="email" class="form-control"
-                [(ngModel)]="emp_email" placeholder="{{e.payload.doc.data().email}}" readonly="true"></ion-input>
+                [(ngModel)]="emp_email" placeholder="{{empData.email}}" readonly="true"></ion-input>
 
             </div>
             <div class="form-group">
 
               <ion-label style="color: #30434e;" position="stacked">Phone number:</ion-label>
               <ion-input style="color: #fdfdfd;" type="text" formControlName="phone" class="form-control"
-                [(ngModel)]="emp_phone" placeholder="{{e.payload.doc.data().phone}}"></ion-input>
+                [(ngModel)]="emp_phone" placeholder="{{empData.phone}}"></ion-input>
               <div *ngFor="let validation of validation_messages.phone">
                 <mat-error
                   *ngIf="empForm.get('phone').hasError(validation.type) && (empForm.get('phone').dirty || empForm.get('phone').touched)">
@@ -138,30 +137,6 @@
           </form>
 
         </ion-card>
-
-
-        <ion-list *ngFor="let message of items; let i =index;">
-          <ion-item [detail]="false">
-            <div slot="start"></div>
-            <ion-label class="ion-text-wrap">
-              <h1 style="color: rgb(25, 25, 46);">
-                {{message.payload.doc.data().fname +' '+ message.payload.doc.data().lname}}
-                <span id="tree" class="date">
-                  <ion-note style="color: black;">{{ message.payload.doc.data().createdAt | date:'short'}}</ion-note>
-                </span>
-              </h1>
-              <div>
-                National ID : {{message.payload.doc.data().nid}}<br>
-                Email : {{message.payload.doc.data().email}}<br>
-                Phone Number : {{message.payload.doc.data().phone}}
-
-                <ion-button class="delete" (click)="deletAccount(i)" slot="end">
-                  <ion-icon name="trash-outline"></ion-icon> -DELETE
-                </ion-button>
-              </div>
-            </ion-label>
-          </ion-item>
-        </ion-list>
 
       </ion-col>
 

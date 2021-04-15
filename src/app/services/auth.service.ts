@@ -6,6 +6,8 @@ import { LoadingController, ToastController } from '@ionic/angular';
 import { Observable, of } from 'rxjs';
 import { User } from 'src/app/models/user/user';
 import { switchMap } from 'rxjs/operators'
+import { FirebaseService } from 'src/app/services/firebase.service';
+
 //import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 
@@ -20,13 +22,15 @@ export class AuthService {
 
   user$: Observable<User>;
   user: User;
+  empData: any;
 
   constructor(
     private afauth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router,
     private loadingCtrl: LoadingController,
-    private toastr: ToastController
+    private toastr: ToastController,
+    private firebase: FirebaseService
   ) {
 
     this.user$ = this.afauth.authState.pipe(switchMap(user => {
@@ -52,13 +56,40 @@ export class AuthService {
 
     loading.present();
     this.afauth.signInWithEmailAndPassword(email, pass).then((data) => {
+
       if (!data.user.emailVerified) {
         loading.dismiss();
         this.toast('please verifide your email!', 'danger');
         this.logout();
+
       } else {
         loading.dismiss();
-        this.router.navigate(['/informations']);
+        this.toast('login success!', 'success');
+        console.log("auth");
+
+        this.firebase.searchEmp(email)
+          .subscribe(ss => {
+            if (ss.docs.length === 0) {
+              console.log('Document not found! Try again!');
+
+            } else {
+
+              ss.docs.forEach(doc => {
+                this.empData = doc.data();
+
+                if (this.empData.type == "police") {
+                  this.router.navigate(['/police-informations']);
+        
+                } else {
+                  
+                  this.router.navigate(['/informations']);
+                }
+              })
+            }
+          });
+
+        
+
       }
     });
 

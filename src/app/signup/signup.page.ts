@@ -20,6 +20,7 @@ export class SignupPage implements OnInit {
   email: string;
   password: string;
   phone:string;
+  type:string;
 
   constructor(
     private afs: AngularFirestore,
@@ -65,6 +66,7 @@ export class SignupPage implements OnInit {
           'phone' : this.phone,
           'email': this.email,
           'password': this.password,
+          'type': this.type,
           'createdAt': Date.now()
         });
 

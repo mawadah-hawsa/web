@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+import { FirebaseService } from 'src/app/services/firebase.service';
+
 
 
 @Component({
@@ -9,19 +11,23 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './signin.page.html',
   styleUrls: ['./signin.page.scss'],
 })
-export class SigninPage  {
+export class SigninPage implements OnInit {
 
   email: string;
   password: string;
+  empData: any;
 
   constructor(
     private router: Router,
     private auth: AuthService,
     private toastr: ToastController,
+    private firebase: FirebaseService,
     private loadingCtrl: LoadingController
   ) { }
 
-  
+  ngOnInit() {
+  }
+
 
   async signin() {
 
@@ -34,25 +40,24 @@ export class SigninPage  {
       });
 
       loading.present();
+     
       this.auth.login(this.email, this.password)
-        .then(()=> {
-          
+        .then(() => {
           loading.dismiss();
-          this.toast('login success!','success');
-          //this.router.navigate(['/profile']);
-          //this.router.navigate(["profile"]);
+
         })
-        .catch((error)=> {
+        .catch((error) => {
           loading.dismiss();
           this.toast(error.massege, 'danger');/////////////////////
         });
-        //this.router.navigate(["profile"]);
+
     } else {
+     
       this.toast('Please enter your email and password!', 'danger');
     }
   }
 
-  
+
 
   async toast(message, status) {
     const toast = await this.toastr.create({
@@ -65,19 +70,19 @@ export class SigninPage  {
   }
 
 
-  mainpage(){
+  mainpage() {
     this.router.navigate(["home"]);
   }
-  about(){
+  about() {
     this.router.navigate(["about"]);
   }
-  contact(){
+  contact() {
     this.router.navigate(["contact"]);
   }
-  services(){
+  services() {
     this.router.navigate(["services"]);
   }
-  signup(){
+  signup() {
     this.router.navigate(["signup"]);
   }
 

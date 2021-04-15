@@ -60,7 +60,7 @@
           <ion-card shape="round">
             <ion-item class="info">
               <ion-label position="floating">Phone Number</ion-label>
-              <ion-input [(ngModel)]="phone" type="email"></ion-input>
+              <ion-input [(ngModel)]="phone" type="text"></ion-input>
             </ion-item>
           </ion-card>
         
@@ -75,6 +75,13 @@
             <ion-item class="info">
               <ion-label position="floating">Enter Your Password</ion-label>
               <ion-input [(ngModel)]="password" type="password"></ion-input>
+            </ion-item>
+          </ion-card>
+
+          <ion-card shape="round">
+            <ion-item class="info">
+              <ion-label position="floating">I am</ion-label>
+              <ion-input [(ngModel)]="type" type="text" placeholder="an employee Or a police"></ion-input>
             </ion-item>
           </ion-card>
         
