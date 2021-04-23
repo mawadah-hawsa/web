@@ -1,19 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-our-services',
+  templateUrl: './our-services.page.html',
+  styleUrls: ['./our-services.page.scss'],
 })
-export class HomePage {
+export class OurServicesPage implements OnInit {
 
-  email: string;
-  password: string;
+  constructor(private router: Router) { }
 
-
-  constructor(private router: Router) {}
+  ngOnInit() {
+  }
 
   signin(){
     this.router.navigate(["signin"]);
@@ -30,7 +28,5 @@ export class HomePage {
   services(){
     this.router.navigate(["our-services"]);
   }
-
-
 
 }

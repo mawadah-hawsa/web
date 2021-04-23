@@ -1,49 +1,41 @@
-ion-content{
-    --background :#d0e0e7;
+ion-content {
+    --background: #d0e0e7;
 }
 
-ion-toolbar{
+ion-toolbar {
     height: 14%;
-    --background :#607D8B;
+    --background: #607d8b;
 }
 
-.logo{
-height: 90px;
-transform:translate(0px, 5px);
+.logo {
+    height: 90px;
+    transform: translate(0px, 5px);
 }
 
+.main-card {
+    --background: #d0e0e7;
+    box-shadow: none;
+    width: 70%;
+    padding: 1%;
 
-
-
-.main-card{
---background :#d0e0e7;
-box-shadow: none;
-width: 70%;
-padding: 1%;
-
-margin-top: 20%;
-margin-left: auto;
-margin-right: auto;
-//left: 50%;
+    margin-top: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    //left: 50%;
 }
 
 .info {
-
     --color: #13c6bc;
     font-size: 13px;
     --background: rgba(80, 83, 92, 0.247);
-    //padding: 5px 10px 2px 10px;
-  
 }
-   
 
-
-.signin { 
+.signin {
     font-size: 17px;
     --color: #526b8b;
-    border-color: #13C6BC;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    text-transform:none;
+    border-color: #13c6bc;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+    text-transform: none;
     display: block;
     width: 40%;
     margin-left: auto;
@@ -52,42 +44,30 @@ margin-right: auto;
 }
 
 .register {
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
     text-align: center;
     color: rgba(58, 73, 99, 0.795);
-    
 }
 
 .signup {
     font-size: 17px;
     --color: #526b8b;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    text-transform:none;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+    text-transform: none;
     display: block;
     width: 40%;
     margin-left: auto;
     margin-right: auto;
-    
 }
 
-/*
-ion-button{
-
-   // --background:#607d8b00;
-   // --border-color:#607D8B;
-
-}*/
-
-ion-card{
-    --background: #31353D;
+ion-card {
+    --background: #31353d;
     margin-top: 5px;
     margin-bottom: 10px;
-    
 }
 
-.logincircles{
+.logincircles {
     width: 100%;
     height: 700px;
-    transform:translate(-10px, -40px);
-  
+    transform: translate(-10px, -40px);
 }

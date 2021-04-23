@@ -1,9 +1,4 @@
 <ion-content [fullscreen]="true" slot="fixed">
-  <!--
-  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
--->
 
   <ion-toolbar>
     <ion-title slot="start" class="logo">
@@ -96,38 +91,7 @@
         </ion-card>
       </ion-col>
 
-      <!--
-         <ion-label>Users</ion-label>
-        <ion-title>Users</ion-title>
-<strong>{{i+1}} </strong>
-          <div *ngIf="item.children && item.open">
-            try this out !
-          </div>
-        <ion-list>
-          <app-message *ngFor="let message of items" [message]="message"></app-message>
-        </ion-list>
-       
-
-
-   
-
-
-      <ion-col>
-        <h5>Users Email :</h5>
-        <div *ngFor="let item of items">
-          <h5>{{item.payload.doc.data().email}} {{item.payload.doc.data().nid}} {{items.length}} </h5>
-        </div>
-      </ion-col>
- -->
-
     </ion-row>
   </ion-grid>
-
-
-
-
-
-  <!-- <h5> {{ calcCrow(21.622030199999998, 39.2063598, 21.602973424432644, 39.10745094046701) }}</h5> -->
-
 
 </ion-content>

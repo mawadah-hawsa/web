@@ -2,15 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-
-import { DataService, Message } from '../services/data.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
-
-
-
-
 
 
 @Component({
@@ -29,13 +23,10 @@ export class InformationsPage implements OnInit {
   searchFor:any;
   
 
-
-
   constructor(
     private firebase: FirebaseService,
     private afauth: AngularFireAuth,
     private router: Router,
-    private data: DataService,
     private afs: AngularFirestore,
     private toastr: ToastController,
     private auth: AuthService
@@ -47,11 +38,9 @@ export class InformationsPage implements OnInit {
     this.afauth.user.subscribe(res => {
       this.emp_email = res.email;
       this.emp_id = res.uid;
-      console.log(this.emp_email);
       this.currentEmp();
     }); 
 
-   
     this.getData();
   }
 
@@ -105,6 +94,11 @@ export class InformationsPage implements OnInit {
     return result;
   }
 
+  deletAccount(i){
+    this.firebase.deleteUser(this.items[i].payload.doc.id);
+    this.toast('The Account Deleted Successfully!','success');
+  }
+
   signout() {
     this.auth.logout();
   }
@@ -130,24 +124,6 @@ export class InformationsPage implements OnInit {
     this.router.navigate(["profile"]);
   }
 
-
-  refresh(ev) {
-    setTimeout(() => {
-      ev.detail.complete();
-    }, 3000);
-  }
-
-  getMessages(): Message[] {
-    return this.data.getMessages();
-  }
-
-  
-
-  deletAccount(i){
-    this.firebase.deleteUser(this.items[i].payload.doc.id);
-    this.toast('The Account Deleted Successfully!','success');
-  }
-
   async toast(message, status) {
     const toast = await this.toastr.create({
       message: message,
@@ -157,25 +133,5 @@ export class InformationsPage implements OnInit {
     });
     toast.present();
   }
-
-  /*
-  calcCrow(lat1, lon1, lat2, lon2) {
-    var R = 6371; // km
-    var dLat = this.toRad(lat2-lat1);
-    var dLon = this.toRad(lon2-lon1);
-    var lat = this.toRad(lat1);
-    var lat = this.toRad(lat2);
-  
-    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat) * Math.cos(lat); 
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-    var d = R * c;
-    return d;
-  }
-  
-  toRad(Value) {
-    return Value * Math.PI / 180;
-  }
-*/
 
 }

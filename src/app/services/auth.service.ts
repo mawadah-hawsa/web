@@ -8,12 +8,6 @@ import { User } from 'src/app/models/user/user';
 import { switchMap } from 'rxjs/operators'
 import { FirebaseService } from 'src/app/services/firebase.service';
 
-//import { Message } from '@angular/compiler/src/i18n/i18n_ast';
-
-
-/*@Injectable({
-  providedIn: 'root'
-})*/
 
 @Injectable({
   providedIn: 'root'
@@ -43,9 +37,9 @@ export class AuthService {
       }
     })
     );
-
-
   }// end of constructor
+
+  
   async login(email, pass) {
 
     const loading = await this.loadingCtrl.create({
@@ -64,15 +58,14 @@ export class AuthService {
 
       } else {
         loading.dismiss();
-        this.toast('login success!', 'success');
-        console.log("auth");
-
+        
         this.firebase.searchEmp(email)
           .subscribe(ss => {
             if (ss.docs.length === 0) {
-              console.log('Document not found! Try again!');
+              this.toast('You do not have an account!', 'danger');
 
             } else {
+              this.toast('login success!', 'success');
 
               ss.docs.forEach(doc => {
                 this.empData = doc.data();
@@ -81,15 +74,11 @@ export class AuthService {
                   this.router.navigate(['/police-informations']);
         
                 } else {
-                  
                   this.router.navigate(['/informations']);
                 }
               })
             }
-          });
-
-        
-
+          }); 
       }
     });
 

@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-
-import { DataService, Message } from '../services/data.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
@@ -16,19 +14,15 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class PoliceInformationsPage implements OnInit {
 
-  Permits= [];
+  Permits = [];
   doc = [];
   empData: any;
   emp_email: string;
-
-
-
 
   constructor(
     private firebase: FirebaseService,
     private afauth: AngularFireAuth,
     private router: Router,
-    private data: DataService,
     private afs: AngularFirestore,
     private toastr: ToastController,
     private auth: AuthService
@@ -66,12 +60,12 @@ export class PoliceInformationsPage implements OnInit {
         result.docs.forEach(doc => {
           this.doc.push(doc.id);
         })
-      
+
 
         for (let index = 0; index < this.doc.length; index++) {
           this.firebase.getPermits(this.doc[index]).subscribe(result => {
             result.docs.forEach(doc => {
-              this.Permits.push( doc.data());
+              this.Permits.push(doc.data());
             })
           });
         }
@@ -95,16 +89,8 @@ export class PoliceInformationsPage implements OnInit {
     this.router.navigate(["contact"]);
   }
   services() {
-    this.router.navigate(["services"]);
+    this.router.navigate(["our-services"]);
   }
-
-
-  refresh(ev) {
-    setTimeout(() => {
-      ev.detail.complete();
-    }, 3000);
-  }
-
 
   async toast(message, status) {
     const toast = await this.toastr.create({

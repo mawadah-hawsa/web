@@ -48,7 +48,7 @@ export class SigninPage implements OnInit {
         })
         .catch((error) => {
           loading.dismiss();
-          this.toast(error.massege, 'danger');/////////////////////
+          this.toast(error.massege, 'danger');
         });
 
     } else {
@@ -80,7 +80,7 @@ export class SigninPage implements OnInit {
     this.router.navigate(["contact"]);
   }
   services() {
-    this.router.navigate(["services"]);
+    this.router.navigate(["our-services"]);
   }
   signup() {
     this.router.navigate(["signup"]);

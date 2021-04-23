@@ -1,11 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
-import { LoadingController, ToastController } from '@ionic/angular';
-import { pathToFileURL } from 'node:url';
-import { Observable, of } from 'rxjs';
-import { User } from 'src/app/models/user/user';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +42,5 @@ export class FirebaseService {
     return this.db.collection('users', ref => ref.where('fname', '<=', searchValue + '\uf8ff').where('fname', '>=', searchValue))
       .snapshotChanges()
   }
-
-
 
 }

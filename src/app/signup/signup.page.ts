@@ -3,9 +3,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { Console } from 'console';
-import { error } from 'protractor';
-import { threadId } from 'worker_threads';
 
 
 @Component({
@@ -100,7 +97,7 @@ export class SignupPage implements OnInit {
     this.router.navigate(["contact"]);
   }
   services(){
-    this.router.navigate(["services"]);
+    this.router.navigate(["our-services"]);
   }
 
 }

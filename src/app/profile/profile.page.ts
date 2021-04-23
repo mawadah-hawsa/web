@@ -3,7 +3,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { DataService } from '../services/data.service';
 import { FirebaseService } from '../services/firebase.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
@@ -48,7 +47,6 @@ export class ProfilePage implements OnInit {
     private firebase: FirebaseService,
     private afauth: AngularFireAuth,
     private router: Router,
-    private data: DataService,
     private afs: AngularFirestore,
     private toastr: ToastController,
     private fb: FormBuilder,
@@ -70,16 +68,9 @@ export class ProfilePage implements OnInit {
         });
     });
 
-    //this.currentEmp();
     this.createForm();
   }
 
-  currentEmp() {
-
-
-
-    this.createForm();
-  }
 
   createForm() {
     this.empForm = this.fb.group({
@@ -120,7 +111,7 @@ export class ProfilePage implements OnInit {
     this.router.navigate(["contact"]);
   }
   services() {
-    this.router.navigate(["services"]);
+    this.router.navigate(["our-services"]);
   }
   permits() {
     this.router.navigate(["permits"]);
