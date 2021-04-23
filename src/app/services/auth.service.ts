@@ -53,7 +53,7 @@ export class AuthService {
 
       if (!data.user.emailVerified) {
         loading.dismiss();
-        this.toast('please verifide your email!', 'danger');
+        this.toast('please verify your email!', 'danger');
         this.logout();
 
       } else {
