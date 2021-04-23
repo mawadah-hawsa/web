@@ -89,7 +89,7 @@ export class ProfilePage implements OnInit {
     this.firebase.updateEmp(this.emp_id, value)
       .then(
         res => {
-          this.router.navigate(['/informations']);
+          this.router.navigate(['/profile']);
         }
       )
   }
@@ -115,6 +115,9 @@ export class ProfilePage implements OnInit {
   }
   permits() {
     this.router.navigate(["permits"]);
+  }
+  reports() {
+    this.router.navigate(["reports"]);
   }
   profile() {
     this.router.navigate(["profile"]);

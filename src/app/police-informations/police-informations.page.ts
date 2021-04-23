@@ -91,6 +91,7 @@ export class PoliceInformationsPage implements OnInit {
   services() {
     this.router.navigate(["our-services"]);
   }
+  
 
   async toast(message, status) {
     const toast = await this.toastr.create({

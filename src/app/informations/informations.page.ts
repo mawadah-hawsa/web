@@ -120,6 +120,9 @@ export class InformationsPage implements OnInit {
   permits(){
     this.router.navigate(["permits"]);
   }
+  reports() {
+    this.router.navigate(["reports"]);
+  }
   profile(){
     this.router.navigate(["profile"]);
   }
